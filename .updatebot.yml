@@ -1,6 +1,5 @@
 github:
   organisations:
-  - name: jenkins-x
+  - name: nuxeo-sandbox
     repositories:
-    - name: jenkins-x-platform
-    - name: builder-go-maven
+    - name: builder-maven-nuxeo

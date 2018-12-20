@@ -1,3 +1,3 @@
-# builder-go
+# builder-maven-nuxeo
 
-This is the base image used in the Jenkins X platform to build golang project.  It contains golang build tools.
+This is the base image used in the Jenkins X platform to build Nuxeo
