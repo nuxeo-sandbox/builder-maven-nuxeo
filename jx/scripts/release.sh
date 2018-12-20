@@ -9,16 +9,17 @@ git config credential.helper store
 export VERSION="$(jx-release-version)"
 echo "Releasing version to ${VERSION}"
 
-docker build -t docker.io/$ORG/$APP_NAME:${VERSION} .
-docker push docker.io/$ORG/$APP_NAME:${VERSION}
-docker tag docker.io/$ORG/$APP_NAME:${VERSION} docker.io/$ORG/$APP_NAME:latest
-docker push docker.io/$ORG/$APP_NAME
+docker build -t $DOCKER_REGISTRY/$ORG/$APP_NAME:${VERSION} .
+docker push $DOCKER_REGISTRY/$ORG/$APP_NAME:${VERSION}
+docker tag $DOCKER_REGISTRY/$ORG/$APP_NAME:${VERSION} $DOCKER_REGISTRY/$ORG/$APP_NAME:latest
+docker push $DOCKER_REGISTRY/$ORG/$APP_NAME
+
 
 #jx step tag --version ${VERSION}
 git tag -fa v${VERSION} -m "Release version ${VERSION}"
 git push origin v${VERSION}
 
-updatebot push-regex -r "\s+tag: (.*)" -v ${VERSION} --previous-line "\s+repository: jenkinsxio/builder-go" values.yaml
-updatebot push-version --kind helm jenkinsxio/builder-go ${VERSION}
-updatebot push-version --kind docker jenkinsxio/builder-go ${VERSION}
+updatebot push-regex -r "\s+tag: (.*)" -v ${VERSION} --previous-line "\s+repository: nuxeo-sandbox/builder-maven-nuxeo" values.yaml
+updatebot push-version --kind helm nuxeo-sandbox/builder-maven-nuxeo ${VERSION}
+updatebot push-version --kind docker nuxeo-sandbox/builder-maven-nuxeo ${VERSION}
 updatebot update-loop
