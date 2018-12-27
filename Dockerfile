@@ -20,3 +20,9 @@ RUN yum -y upgrade && yum -y install \
     libwpd-tools \
     perl-Image-ExifTool \
     ghostscript
+
+# Install gulp a
+RUN npm install -g gulp grunt grunt-cli polymer-cli bower yo && \
+    rm -rf /var/lib/apt/lists/* && \
+    chown -R 1001:0 $HOME && \
+    chmod -R g+rw $HOME
