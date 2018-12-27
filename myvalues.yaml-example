@@ -1,11 +1,3 @@
-# builder-maven-nuxeo
-
-This is the base image used in the Jenkins X platform to build Nuxeo.
-
-You have to update your jenkisx deployment to use it .
-Create a file called myvalues.yaml in the jx home folder  ~/jx with the following configuration:
-
-```
 jenkins:
   Agent:
     PodTemplates:
@@ -22,6 +14,7 @@ jenkins:
           mountPath: /home/jenkins/.docker
         EnvVars:
           JENKINS_URL: http://jenkins:8080
+          _JAVA_OPTIONS: '-XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Xms10m -Xmx192m'
           GIT_COMMITTER_EMAIL: jenkins-x@googlegroups.com
           GIT_AUTHOR_EMAIL: jenkins-x@googlegroups.com
           GIT_AUTHOR_NAME: jenkins-x-bot
@@ -45,18 +38,3 @@ jenkins:
             Command: "/bin/sh -c"
             Args: "cat"
             Tty: true
-```
-
-And execute:
-
-```
-jx install --default-admin-password=$YourPass  --namespace=$YourNamespace --no-tiller
-```
-
-When jenkisx is updated you should get a message like:
-
-```
-Using local value overrides file /Users/mariana/.jx/myvalues.yaml
-```
-
-For more examples on the builder, see https://github.com/jenkins-x/jenkins-x-platform/blob/master/values.yaml#L1786
