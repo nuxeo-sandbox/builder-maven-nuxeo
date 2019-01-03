@@ -2,8 +2,8 @@
 
 This is the base image used in the Jenkins X platform to build Nuxeo.
 
-You have to update your jenkisx deployment to use it .
-Create a file called myvalues.yaml in the jx home folder  ~/jx with the following configuration:
+You have to update your jenkinsx deployment to use it .
+Create a file called myvalues.yaml in the jx home folder  ~/.jx with the following configuration:
 
 ```
 jenkins:
