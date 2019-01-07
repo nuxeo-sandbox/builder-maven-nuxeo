@@ -31,9 +31,9 @@ jenkins:
           maven-nuxeo:
             Image: 10.19.250.70:5000/nuxeo-sandbox/builder-maven-nuxeo 
             Privileged: true
-            RequestCpu: "800m"
+            RequestCpu: "500m"
             RequestMemory: "2048Mi"
-            LimitCpu: "1"
+            LimitCpu: "2"
             LimitMemory: "2048Mi"
             Command: "/bin/sh -c"
             Args: "cat"
