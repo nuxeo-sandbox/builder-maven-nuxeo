@@ -53,7 +53,7 @@ And execute:
 jx install --default-admin-password=$YourPass  --namespace=$YourNamespace --no-tiller
 ```
 
-When jenkisx is updated you should get a message like:
+When jenkinsx is updated you should get a message like:
 
 ```
 Using local value overrides file /Users/mariana/.jx/myvalues.yaml
