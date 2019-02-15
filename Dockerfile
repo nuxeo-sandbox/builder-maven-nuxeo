@@ -49,3 +49,15 @@ RUN  wget -nv -O chromedriver_linux${CPU_ARCH}.zip ${CHROME_DRIVER_URL} \
   && chmod 755 chromedriver \
   && mv chromedriver /usr/local/bin/ \
   && chromedriver --version
+
+#==============
+# Install njx
+#==============
+# Checkout njx sources and build them
+RUN git clone https://github.com/nuxeo/nuxeo-jenkins-x-cli.git && \
+  cd nuxeo-jenkins-x-cli && \
+  git checkout wip-presets && \
+  npm install && \
+  npm run build && \
+  cd lib && ln -n njx.js njx
+RUN ln -s /home/jenkins/nuxeo-jenkins-x-cli/lib/njx.js /usr/bin/njx
