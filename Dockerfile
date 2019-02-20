@@ -58,5 +58,6 @@ RUN cd /opt && git clone https://github.com/nuxeo/nuxeo-jenkins-x-cli.git && \
   cd nuxeo-jenkins-x-cli && \
   git checkout master && \
   npm install && \
-  npm run prepare
+  npm run prepare && \
+  npm run postprepare
 RUN ln -s /opt/nuxeo-jenkins-x-cli/lib/njx.js /usr/bin/njx
