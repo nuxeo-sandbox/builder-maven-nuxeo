@@ -13,7 +13,7 @@ pipeline {
             }
             steps {
                 container('jx-base') {
-                    sh "docker build -t $DOCKER_REGISTRY/$ORG/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER ."
+                    sh "docker build --no-cache -t $DOCKER_REGISTRY/$ORG/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER ."
                     sh "docker push $DOCKER_REGISTRY/$ORG/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER"
                 }
             }
