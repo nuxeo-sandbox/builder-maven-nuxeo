@@ -7,6 +7,7 @@ RUN yum install -y gcc-c++ make
 RUN curl -sL https://rpm.nodesource.com/setup_6.x 
 RUN yum install -y nodejs npm --enablerepo=epel 
 RUN npm install -g node-gyp bower
+RUN echo '{ "allow_root": true }' > /root/.bowerrc
 
 # Install conversion tools
 RUN yum -y upgrade && yum -y install \
