@@ -4,8 +4,8 @@ FROM jenkinsxio/builder-maven:0.1.245
 RUN yum install -y gcc openssl-devel
 # Install NodeJS
 RUN yum install -y gcc-c++ make
-RUN curl -sL https://rpm.nodesource.com/setup_6.x 
-RUN yum install -y nodejs npm --enablerepo=epel 
+RUN curl -sL https://rpm.nodesource.com/setup_11.x | bash -
+RUN yum install -y nodejs
 RUN npm install -g node-gyp bower
 RUN echo '{ "allow_root": true }' > /root/.bowerrc
 
@@ -23,13 +23,10 @@ RUN yum -y upgrade && yum -y install \
   ghostscript
 
 # Install gulp a
-RUN npm install -g gulp grunt grunt-cli polymer-cli bower yo && \
+RUN npm install -g gulp bower && \
   rm -rf /var/lib/apt/lists/* && \
   chown -R 1001:0 $HOME && \
   chmod -R g+rw $HOME
-
-# Install ts-node
-RUN npm install -g ts-node
 
 #Install yarn
 RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
