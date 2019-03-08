@@ -1,17 +1,16 @@
 FROM jenkinsxio/builder-maven:0.1.275
 
-# Install your tools and libraries
-RUN yum install -y gcc openssl-devel
-# Install NodeJS
-RUN yum install -y gcc-c++ make
+# Add extra yum repositories
 RUN curl -sL https://rpm.nodesource.com/setup_11.x | bash -
-RUN yum install -y nodejs
-RUN npm install -g node-gyp bower
-RUN echo '{ "allow_root": true }' > /root/.bowerrc
+RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
 
 # Install conversion tools
-RUN yum -y upgrade && yum -y install \
+RUN yum -y install \
+  gcc openssl-devel \
+  gcc-c++ make \
+  node-js \
   perl \
+  yarn \
   ImageMagick \
   ffmpeg \
   ffmpeg2theora \
@@ -20,17 +19,14 @@ RUN yum -y upgrade && yum -y install \
   libreoffice \
   libwpd-tools \
   perl-Image-ExifTool \
-  ghostscript
+  ghostscript \
+  && yum clean all
 
 # Install gulp a
-RUN npm install -g gulp bower && \
-  rm -rf /var/lib/apt/lists/* && \
+RUN npm install -g node-gyp gulp bower && \
   chown -R 1001:0 $HOME && \
   chmod -R g+rw $HOME
-
-#Install yarn
-RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
-RUN yum install -y yarn
+RUN echo '{ "allow_root": true }' > /root/.bowerrc
 
 #==================
 # Chrome webdriver
