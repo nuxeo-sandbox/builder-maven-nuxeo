@@ -1,4 +1,4 @@
-FROM jenkinsxio/builder-maven:0.1.245
+FROM jenkinsxio/builder-maven:0.1.275
 
 # Install your tools and libraries
 RUN yum install -y gcc openssl-devel
