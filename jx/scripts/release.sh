@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -e
+set -ex
+
 # ensure we're not on a detached head
 git checkout master
 
@@ -19,7 +20,7 @@ docker push $DOCKER_REGISTRY/$ORG/$APP_NAME
 git tag -fa v${VERSION} -m "Release version ${VERSION}"
 git push origin v${VERSION}
 
-updatebot push-regex -r "\s+tag: (.*)" -v ${VERSION} --previous-line "\s+repository: nuxeo-sandbox/builder-maven-nuxeo" values.yaml
+updatebot push-regex -r "\s+tag: (.*)" -v ${VERSION} --previous-line "\s+repository: ${ORG}/${APP_NAME}" values.yaml
 updatebot push-version --kind helm nuxeo-sandbox/builder-maven-nuxeo ${VERSION}
 updatebot push-version --kind docker nuxeo-sandbox/builder-maven-nuxeo ${VERSION}
 updatebot update-loop
